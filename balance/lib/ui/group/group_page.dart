@@ -114,34 +114,40 @@ class _GroupPageState extends State<GroupPage> {
                     return setState(() {
                       Navigator.pop(context);
                     });
-                  } else if (inputValue < 0 &&
-                      amount > 0 ) {
-
-                  var totalValue = inputValue + (- amount);
-                     _transactionsDao.updateAmount(inputValue, id);
+                  } else if (inputValue < 0 && amount > 0) {
+                    var totalValue = inputValue + (-amount);
+                    _transactionsDao.updateAmount(inputValue, id);
                     _groupsDao.adjustBalance(
                         balance + totalValue, widget.groupId);
                     return setState(() {
                       Navigator.pop(context);
                     });
-                    
-                  } else if (inputValue == 0 &&
-                      amount > 0 ) { 
-                    
-                     _transactionsDao.updateAmount(inputValue, id);
-                    _groupsDao.adjustBalance(
-                        balance - amount, widget.groupId);
+                  } else if (inputValue == 0 && amount > 0) {
+                    _transactionsDao.updateAmount(inputValue, id);
+                    _groupsDao.adjustBalance(balance - amount, widget.groupId);
                     return setState(() {
                       Navigator.pop(context);
                     });
-                  } else if (inputValue == 0 &&
-                      amount < 0 ) { 
+                  } else if (inputValue == 0 && amount < 0) {
+                    var convertedAmount = amount.abs();
 
-                        var convertedAmount = amount.abs();
-
-                        _transactionsDao.updateAmount(inputValue, id);
+                    _transactionsDao.updateAmount(inputValue, id);
                     _groupsDao.adjustBalance(
                         balance + convertedAmount, widget.groupId);
+                    return setState(() {
+                      Navigator.pop(context);
+                    });
+                  } else if (inputValue > 0 && amount == 0) {
+                    _transactionsDao.updateAmount(inputValue, id);
+                    _groupsDao.adjustBalance(
+                        balance + inputValue, widget.groupId);
+                    return setState(() {
+                      Navigator.pop(context);
+                    });
+                  } else if (inputValue < 0 && amount == 0) {
+                    _transactionsDao.updateAmount(inputValue, id);
+                    _groupsDao.adjustBalance(
+                        balance + inputValue, widget.groupId);
                     return setState(() {
                       Navigator.pop(context);
                     });
