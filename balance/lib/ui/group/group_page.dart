@@ -251,19 +251,29 @@ class _GroupPageState extends State<GroupPage> {
                               itemCount: snapshot.requireData.length,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  height: 50,
+                                  height: 80,
                                   child: Padding(
                                     padding: EdgeInsets.only(
                                         left: 20.0, right: 10.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        Column( 
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                           Text(
+                                          snapshot.requireData[index].createdAt.toString(),
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                         Text(
                                           snapshot.requireData[index].amount
                                               .toString(),
                                           style: TextStyle(fontSize: 18),
-                                        ),
+                                        )
+                                        ],),
                                         ElevatedButton(
                                             onPressed: () {
                                               _editController.text = snapshot
